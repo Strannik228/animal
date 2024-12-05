@@ -1,0 +1,51 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Регистрация{% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+        <h1 class="text-center">Регистрация</h1>
+        <hr>
+        {% if form.errors %}
+            <div class="alert alert-danger" role="alert">
+                <ul>
+                {% for field, errors in form.errors.items %}
+                    {% for error in errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+        <form action="{% url 'register' %}" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="id_username">Имя пользователя:</label>
+                <input type="text" name="username" maxlength="150" autofocus required id="id_username" class="form-control" placeholder="Имя пользователя">
+            </div>
+            <div class="form-group">
+                <label for="id_email">Адрес электронной почты:</label>
+                <input type="email" name="email" maxlength="254" required id="id_email" class="form-control" placeholder="Адрес электронной почты">
+            </div>
+            <div class="form-group">
+                <label for="id_password1">Пароль:</label>
+                <input type="password" name="password1" required id="id_password1" class="form-control" placeholder="Пароль">
+                <small class="form-text text-muted">
+                    Пароль должен соответствовать следующим критериям:
+                    <ul>
+                        <li>Минимум 8 символов</li>
+                        <li>Содержать как минимум одну цифру</li>
+                        <li>Содержать хотя бы одну букву верхнего регистра</li>
+                        <li>Содержать хотя бы одну букву нижнего регистра</li>
+                        <li>Содержать хотя бы один специальный символ (например, !@#$%^&*)</li>
+                    </ul>
+                </small>
+            </div>
+            <div class="form-group">
+                <label for="id_password2">Подтверждение пароля:</label>
+                <input type="password" name="password2" required id="id_password2" class="form-control" placeholder="Подтверждение пароля">
+            </div>
+            <button type="submit" class="btn btn-success btn-block">Зарегистрироваться</button>
+        </form>
+    </div>
+{% endblock %}

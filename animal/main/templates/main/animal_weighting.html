@@ -1,0 +1,26 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Взвешивания животного{% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+        <h1 class="text-center">Взвешивания для {{ animal.name }}</h1>
+        <hr>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Дата</th>
+                    <th>Вес (кг)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for weighting in weightings %}
+                    <tr>
+                        <td>{{ weighting.date }}</td>
+                        <td>{{ weighting.weight_kg }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
